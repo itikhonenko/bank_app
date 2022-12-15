@@ -1,0 +1,29 @@
+FROM node:14.19.0-alpine
+
+ENV ROOT_PATH /client
+
+# set working directory
+RUN mkdir $ROOT_PATH && chown -R node:node $ROOT_PATH
+WORKDIR $ROOT_PATH
+
+# add `/client/node_modules/.bin` to $PATH
+ENV PATH $ROOT_PATH/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY package*.json ./
+
+# Set user for subsequent commands
+USER node
+
+RUN yarn install \
+  --prefer-offline \
+  --frozen-lockfile \
+  --non-interactive \
+  --production=false
+
+COPY . .
+
+EXPOSE 8080
+
+# start app
+CMD yarn serve
