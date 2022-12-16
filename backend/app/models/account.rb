@@ -7,4 +7,6 @@ class Account < ApplicationRecord
   has_many :users, through: :users_accounts
 
   enum account_type: %i[regular]
+
+  validates :balance, numericality: { greater_than_or_equal_to: 0 }
 end
