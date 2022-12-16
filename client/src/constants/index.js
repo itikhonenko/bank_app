@@ -1,0 +1,5 @@
+export const BASE_URL = 'http://localhost:3000/'
+export const API_VERSION = 'api/v1/'
+export const USERS_PATH = 'users'
+export const TOKEN_PATH = 'user_token'
+export const BANK_ACC_TRANSFER_PATH = 'transfers'

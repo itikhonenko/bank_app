@@ -20,6 +20,9 @@ export const auth = {
         }
       );
     },
+    logout() {
+      localStorage.removeItem('token');
+    }
   },
   mutations: {
     loginSuccess(state) {
