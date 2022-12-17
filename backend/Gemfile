@@ -21,9 +21,17 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Cross-Origin Resource Sharing (CORS)
 gem 'rack-cors'
 
+# Apitome is a API documentation tool for Rails built on top of the great RSpec DSL
+gem 'apitome'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'faker'
+  gem 'rspec_api_documentation'
+  gem 'rspec-rails', '~> 6.0.0'
 end
 
 group :development do
