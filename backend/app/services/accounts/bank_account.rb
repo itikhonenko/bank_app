@@ -8,53 +8,28 @@ module Accounts
 
     def_delegators :account, :balance, :id
 
-    attr_reader :current_user
+    attr_reader :account_creation_block
 
-    def initialize(opts, &account_creation_block)
-      @current_user = opts[:current_user]
+    def initialize(&account_creation_block)
       @account_creation_block = account_creation_block
     end
 
     def deposit(amount)
-      check_amount(amount)
-
       account.update!(balance: balance + amount)
     end
 
     def withdrawal(amount)
-      check_access
-      check_balance(amount)
-      check_amount(amount)
-
       account.update!(balance: balance - amount)
+    end
+
+    def exists?
+      account.present?
     end
 
     private
 
-    # TODO. All checks can be delegated to a separate class and injected as a dependency
-    def check_access
-      return if account.users.any? { |user| user.id == @current_user.id }
-
-      raise StandardError, 'Transfer is not allowed.'
-    end
-
-    def check_balance(amount)
-      return if balance - amount >= 0
-
-      raise StandardError, 'Insufficient balance'
-    end
-
-    def check_amount(amount)
-      return if amount.positive?
-
-      raise StandardError, 'Transfer is not allowed.'
-    end
-
     def account
       @account ||= @account_creation_block.call
-      return @account if @account
-
-      raise StandardError, 'Transfer is not allowed.'
     end
   end
 end
