@@ -18,7 +18,7 @@ module Accounts
     def deposit(amount)
       check_amount(amount)
 
-      account.update!(balance: account.balance + amount)
+      account.update!(balance: balance + amount)
     end
 
     def withdrawal(amount)
@@ -26,7 +26,7 @@ module Accounts
       check_balance(amount)
       check_amount(amount)
 
-      account.update!(balance: account.balance - amount)
+      account.update!(balance: balance - amount)
     end
 
     private
@@ -39,7 +39,7 @@ module Accounts
     end
 
     def check_balance(amount)
-      return if account.balance - amount >= 0
+      return if balance - amount >= 0
 
       raise StandardError, 'Insufficient balance'
     end

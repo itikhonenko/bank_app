@@ -26,7 +26,7 @@ class CreateTransferService
 
   def sender_account
     account_class.new({ current_user: current_user }) do
-      current_user.accounts.regular.take
+      UsersAccount.find_by(user: current_user)&.account
     end
   end
 
