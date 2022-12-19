@@ -3,7 +3,7 @@
 class TransferService
   prepend BaseService
 
-  attr_reader :params, :current_user, :account_class, :amount, :user_id
+  attr_reader :current_user, :account_class, :amount, :user_id
 
   def initialize(opts)
     @amount = opts[:params][:amount].to_d
@@ -39,8 +39,8 @@ class TransferService
   def record_transaction
     Transaction.create!(
       from_account_id: sender_account.id,
-      to_account_id: recipient_account.id,
-      amount: amount
+      to_account_id:   recipient_account.id,
+      amount:          amount
     )
   end
 end

@@ -31,7 +31,7 @@ RSpec.describe 'Transfers API', type: :request do
     context 'when the balance is less than the transfer amount' do
       let(:invalid_params) do
         {
-          amount: recipient_account.account.balance + 1000,
+          amount:  recipient_account.account.balance + 1000,
           user_id: recipient_account.user.id
         }
       end

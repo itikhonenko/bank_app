@@ -1,0 +1,98 @@
+AllCops:
+  TargetRubyVersion: 2.6.3
+  Exclude:
+    - db/migrate/*
+    - db/schema.rb
+    - bin/*
+    - public/**/*
+    - tmp/**/*
+    - config/environments/*
+    - spec/rails_helper.rb
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - app/schemas/**/*
+    - spec/**/*
+    - config/routes.rb
+    - db/seeds.rb
+    - db/seeds/**/*
+    - lib/tasks/auto_annotate_models.rake
+
+Style/MixinUsage:
+  Exclude:
+    - db/seeds.rb
+
+# Commonly used screens these days easily fit more than 80 characters.
+Metrics/LineLength:
+  Max: 135
+
+# Too short methods lead to extraction of single-use methods, which can make
+# the code easier to read (by naming things), but can also clutter the class
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - db/seeds.rb
+    - db/seeds/**/*
+
+# The guiding principle of classes is SRP, SRP can't be accurately measured by LoC
+Metrics/ClassLength:
+  Max: 350
+
+# We do not need to support Ruby 1.9, so this is good to use.
+Style/SymbolArray:
+  Enabled: true
+
+# Most readable form.
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+# Mixing the styles looks just silly.
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+# String#% is by far the least verbose and only object oriented variant.
+Style/FormatString:
+  EnforcedStyle: percent
+
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    # inject seems more common in the community.
+    reduce: 'inject'
+
+# Fail is an alias of raise. Avoid aliases, it's more cognitive load for no gain.
+# The argument that fail should be used to abort the program is wrong too,
+# there's Kernel#abort for that.
+Style/SignalException:
+  EnforcedStyle: only_raise
+  Exclude:
+    - app/concepts/**/*
+# Suppressing exceptions can be perfectly fine, and be it to avoid to
+# explicitly type nil into the rescue since that's what you want to return,
+# or suppressing LoadError for optional dependencies
+Lint/SuppressedException:
+  Enabled: false
+
+# Enforcing the names of variables? To single letter ones? Just no.
+Style/SingleLineBlockParams:
+  Enabled: false
+
+# Shadowing outer local variables with block parameters is often useful
+# to not reinvent a new name for the same thing, it highlights the relation
+# between the outer variable and the parameter. The cases where it's actually
+# confusing are rare, and usually bad for other reasons already, for example
+# because the method is too long.
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+
+# Check with yard instead.
+Style/Documentation:
+  Enabled: false
+
+# This is just silly. Calling the argument `other` in all cases makes no sense.
+Naming/BinaryOperatorParameterName:
+  Enabled: false
