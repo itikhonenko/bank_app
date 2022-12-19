@@ -14,7 +14,7 @@ module Transfer
       key.failure('must exist') unless sender_account.exists?
     end
 
-    rule(:user_id, :recipient_account) do
+    rule(:recipient_account) do
       key.failure('must exist') unless recipient_account.exists?
     end
 
