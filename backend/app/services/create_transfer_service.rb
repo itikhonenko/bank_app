@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TransferService
+class CreateTransferService
   prepend BaseService
 
   attr_reader :current_user, :account_class, :amount, :user_id

@@ -9,6 +9,7 @@
               class="form-control"
               v-validate="'required|min_value:1'"
               v-model="accounts[user.id].amount"
+              ref="amount"
               placeholder="Amount"
               aria-label="Amount"
               :name="`amount[${user.id}]`"
@@ -45,7 +46,7 @@ export default {
       response => {
         this.users = response.data;
         response.data.forEach(({ id }) => {
-          this.accounts[id] = { amount: 0, error: false }
+          this.accounts[id] = { amount: '', error: false }
         });
       }
     );
@@ -65,7 +66,11 @@ export default {
               alert('Transfer is not allowed.')
             }
           )
-          .finally(() => 1);
+          .finally(() => {
+            this.$refs.amount.forEach(input => {
+              input.value = ''
+            });
+          });
       });
     },
     isDisabled(id) {

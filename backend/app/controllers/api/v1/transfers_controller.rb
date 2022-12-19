@@ -4,7 +4,7 @@ module Api
   module V1
     class TransfersController < ApplicationController
       def create
-        transfer = TransferService.call({ current_user: current_user, params: params })
+        transfer = CreateTransferService.call({ current_user: current_user, params: params })
 
         if transfer.success?
           render json: { result: 'Funds have been transferred' }, status: :created
