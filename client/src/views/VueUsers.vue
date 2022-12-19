@@ -14,7 +14,7 @@
               aria-label="Amount"
               :name="`amount[${user.id}]`"
               aria-describedby="basic-addon2">
-              <button class="btn btn-primary" type="submit" :disabled="isDisabled(user.id)" @click="transferTo(user.id)">Send</button>
+              <button class="btn btn-primary" type="submit" @click="transferTo(user.id)">Send</button>
             </div>
             <div
               v-if="errors.has(`amount[${user.id}]`)"
@@ -70,11 +70,11 @@ export default {
             this.$refs.amount.forEach(input => {
               input.value = ''
             });
+            for (let [_, acc] of Object.entries(this.accounts)) {
+              acc.amount = ''
+            }
           });
       });
-    },
-    isDisabled(id) {
-      return this.accounts[id].amount <= 0
     }
   }
 };
