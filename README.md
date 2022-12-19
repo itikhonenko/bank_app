@@ -8,17 +8,24 @@
 
 3. Run `docker-compose build`
 
+4. Run `docker-compose up`
+
 ## Tests
 ```sh
 docker-compose run backend rspec
 ```
 
+## Linters
+```sh
+docker-compose run backend rubocop
+```
+
 ## Generate API docs
 ```sh
-docker-compose up backend -d
-docker-compose exec backend rake docs:generate
+docker-compose up backend -d || (dcup backend -d)
+docker-compose exec backend rake docs:generate || (dce backend rake docs:generate)
 ```
-then -> `http://localhost:3000/api/docs`
+`http://localhost:3000/api/docs`
 
 ## Test users
 Test users can be found in the `seed.rb` file.
