@@ -70,7 +70,7 @@ export default {
             this.$refs.amount.forEach(input => {
               input.value = ''
             });
-            for (let [_, acc] of Object.entries(this.accounts)) {
+            for (let [, acc] of Object.entries(this.accounts)) {
               acc.amount = ''
             }
           });

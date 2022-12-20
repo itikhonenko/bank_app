@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 x-backend:
   &backend
@@ -13,6 +13,7 @@ x-backend:
     DB_PORT: 5432
     DB_NAME: db
     SECRET_KEY_BASE: STUB
+  restart: on-failure:3
   stdin_open: true
   tty: true
   volumes:

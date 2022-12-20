@@ -6,9 +6,11 @@
 
 2. Install Yarn or NPM
 
-3. Run `docker-compose build`
+3. Make sure `backend/config/master.key` is in place (otherwise you may need to re-generate credentials)
 
-4. Run `docker-compose up`
+4. Run `docker-compose build`
+
+5. Run `docker-compose up`
 
 ## Tests
 ```sh
